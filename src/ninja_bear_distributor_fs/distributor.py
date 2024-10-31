@@ -11,6 +11,14 @@ class NoPathsException(Exception):
         super().__init__('No paths provided')
 
 
+class DestinationDoesntExistException(Exception):
+    def __init__(self, destination: str) -> None:
+        super().__init__(
+            f'The destination directory \'{destination}\' ' \
+            'doesn\'t exist. If it shall be created automatically, set create_parents to true'
+        )
+
+
 class Distributor(DistributorBase):
     """
     FileSystem specific distributor. For more information about the distributor methods,
@@ -53,6 +61,10 @@ class Distributor(DistributorBase):
             if destination_path and self._create_parents:
                 os.makedirs(destination_path, exist_ok=True)
 
+            # Make sure target directory exists.
+            if not os.path.exists(destination_path):
+                raise DestinationDoesntExistException(destination_path)
+            
             # Write files to destination path.
             with open(join(destination_path, info.file_name), 'w') as f:
                 f.write(info.data)
