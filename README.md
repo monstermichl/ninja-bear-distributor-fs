@@ -1,5 +1,5 @@
 # ninja-bear-distributor-fs
-This [ninja-bear](https://pypi.org/project/ninja-bear) plugin makes it possible to distribute generated files to other locations on the file system.
+This [ninja-bear](https://pypi.org/project/ninja-bear) plugin provides the possibility to distribute generated files to other locations on the file system.
 
 ```yaml
 distributors:  # Specifies which distributor plugins to load.
