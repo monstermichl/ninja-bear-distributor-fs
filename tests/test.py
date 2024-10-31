@@ -9,7 +9,6 @@ from os.path import join
 import yaml
 
 from ninja_bear import (
-    DistributorCredentials,
     DumpInfo,
     GeneratorBase,
     LanguageConfigBase,
@@ -19,18 +18,6 @@ from ninja_bear import (
     PropertyType,
 )
 from src.ninja_bear_distributor_fs.distributor import Distributor
-
-
-_COMPARE_FILE_CONTENT = """
-struct TestConfig:
-    boolean myBoolean = true
-    int myInteger = 142
-    float myFloat = 322.0
-    float myCombinedFloat = 45724.0
-    double myDouble = 233.9
-    regex myRegex = /Test Reg(E|e)x/ -- Just another RegEx.
-    string mySubstitutedString = 'Sometimes I just want to scream Hello World!'
-"""
 
 
 class ExampleScriptGenerator(GeneratorBase):
