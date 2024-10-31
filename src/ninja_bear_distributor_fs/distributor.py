@@ -6,6 +6,11 @@ from ninja_bear import DistributorBase, DistributeInfo
 from ninja_bear.base.distributor_credentials import DistributorCredentials
 
 
+class NoPathsException(Exception):
+    def __init__(self) -> None:
+        super().__init__('No paths provided')
+
+
 class Distributor(DistributorBase):
     """
     FileSystem specific distributor. For more information about the distributor methods,
@@ -14,10 +19,15 @@ class Distributor(DistributorBase):
     def __init__(self, config: Dict, credentials: DistributorCredentials=None):
         super().__init__(config, credentials)
 
-        paths, _ = self.from_config('paths')
+        paths, paths_exists = self.from_config('paths')
+
+        if not paths_exists:
+            raise NoPathsException()
 
         # Make sure _paths is a list.
         if not isinstance(paths, list):
+            if not paths:
+                paths = '.'
             paths = [paths]
 
         # Make sure _paths are directories.

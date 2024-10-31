@@ -8,7 +8,7 @@ LONG_DESCRIPTION = Path(__file__).parent.absolute().joinpath('README.md').read_t
 
 setup(
     name='ninja-bear-distributor-fs', 
-    version='0.1.0',
+    version='0.1.1',
     author='monstermichl',
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
